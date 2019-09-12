@@ -32,7 +32,7 @@ package com.chun.algorithm.n3;
 class Solution {
 
     public static void main(String[] args) {
-        String str = "asdgjsa";
+        String str = "gadsabcfgbabcbb";
         System.out.println(lengthOfLongestSubstring(str));
     }
 
@@ -43,12 +43,12 @@ class Solution {
      */
     public static int lengthOfLongestSubstring(String s) {
         int startIndex = 0;
-        int maxLength = 1;
+        int maxLength = 0;
         char[] chars = s.toCharArray();
         for (int i = 1; i < chars.length; i++) {
             for (int j = startIndex; j < i; j++) {
                 if(chars[j] == chars[i]){
-                    maxLength = Math.max(maxLength, j - startIndex);
+                    maxLength = Math.max(maxLength, i - startIndex);
                     startIndex = j + 1;
                 }
             }

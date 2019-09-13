@@ -19,7 +19,7 @@ package com.chun.algorithm.n1;
  * @Author chun
  * @Date 2019/9/12 10:32
  */
-public class TwoSum {
+public class Demo {
 
     public static void main(String[] args) {
         int[] nums = {2, 7, 11, 15};

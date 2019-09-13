@@ -22,7 +22,7 @@ import java.util.List;
  * @Author chun
  * @Date 2019/9/12 11:05
  */
-public class AddTwoNumbers {
+public class Demo {
 
     public static void main(String[] args) {
         ListNode l1 = new ListNode(2);

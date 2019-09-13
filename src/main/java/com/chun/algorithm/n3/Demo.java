@@ -29,7 +29,7 @@ package com.chun.algorithm.n3;
  * @Author chun
  * @Date 2019/9/12 11:05
  */
-class Solution {
+class Demo {
 
     public static void main(String[] args) {
         String str = "gadsabcfgbabcbb";

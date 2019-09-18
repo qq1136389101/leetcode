@@ -62,74 +62,6 @@ public class Demo {
         System.out.println(isMatch(s, p));
     }
 
-//    /**
-//     * 通过使用 * 将字符串分隔成多个子字符串，
-//     * 每个子字符串的最后一个字符是 0 到 多个的，
-//     * 其余的字符串需要按顺序一一对应，如果有 . 则匹配任意字符
-//     * @param s
-//     * @param p
-//     * @return
-//     */
-//    public static boolean isMatch(String s, String p) {
-//        String[] strings = p.split("\\*");
-//        String subStrHead;
-//        char preCycleChar;
-//        for (int i = 0; i < strings.length; i++) {
-//
-//            if(isEmpty(strings[i])){
-//                continue;
-//            }
-//
-//            if(i == strings.length - 1){
-//                subStrHead = strings[i];
-//            }else{
-//                subStrHead = strings[i].substring(0, strings[i].length()-1);
-//            }
-//
-//            preCycleChar = (i > 0 && strings[i-1].length() > 0) ? strings[i-1].charAt(strings[i-1].length() - 1) : ' ';
-//
-//            s = isMatchSubStr(s, subStrHead, preCycleChar);
-//            if(s == null){
-//                return false;
-//            }
-//        }
-//        if(!s.equals("")){
-//            return false;
-//        }else{
-//            return true;
-//        }
-//    }
-//
-//    /**
-//     * 判断是否符合子字符串，将符合的部分截取掉，
-//     * 保留剩余的字符用作下一次匹配
-//     *
-//     * @param s         要比较的字段
-//     * @param subStrHead 子字符串（不包含 * 前面的字符）
-//     * @param preCycleChar 上一个子字符串的 * 前面的一个字符
-//     * @return
-//     */
-//    private static String isMatchSubStr(String s, String subStrHead, char preCycleChar){
-//
-//        // 跳过上一个字符串通配符 * 匹配的字符
-//        while (s.charAt(0) == preCycleChar){
-//            s = s.substring(1);
-//            continue;
-//        }
-//
-//        // 判断是否包含当前子字符串的头部
-//        for (int i = 0; i < subStrHead.length(); i++) {
-//            char first = subStrHead.charAt(i);
-//            if(first == s.charAt(0) || first == '.'){
-//                s = s.substring(1);
-//                continue;
-//            }else{
-//                return null;
-//            }
-//        }
-//        return s;
-//    }
-//
     public static boolean isEmpty(String str){
         if(str == null || str.equals("")){
             return true;
@@ -138,24 +70,88 @@ public class Demo {
         }
     }
 
+//    /**
+//     * 回溯算法
+//     *
+//     * @param text
+//     * @param pattern
+//     * @return
+//     */
+//    public static boolean isMatch(String text, String pattern) {
+//        if(pattern.isEmpty()){
+//            return text.isEmpty();
+//        }
+//        boolean firstMatch = !text.isEmpty() && (text.charAt(0) == pattern.charAt(0) || pattern.charAt(0) == '.');
+//
+//        if(pattern.length() > 1 && pattern.charAt(1) == '*'){
+//            return isMatch(text, pattern.substring(2)) || (firstMatch && isMatch(text.substring(1), pattern));
+//        }else{
+//            return firstMatch && isMatch(text.substring(1), pattern.substring(1));
+//        }
+//    }
+
+
+
+    static Boolean[][] memo;
+
     /**
-     * 回溯算法
-     *
+     * 动态规划 - 自顶向下备忘录
+     * @param text
+     * @param pattern
+     * @return
+     */
+    public static boolean isMatch2(String text, String pattern) {
+        memo = new Boolean[text.length() + 1][pattern.length() + 1];
+        return dp(0, 0, text, pattern);
+    }
+
+    public static boolean dp(int i, int j, String text, String pattern) {
+        if (memo[i][j] != null) {
+            return memo[i][j] == true;
+        }
+        boolean ans;
+        if (j == pattern.length()){
+            ans = i == text.length();
+        } else{
+            boolean first_match = (i < text.length() &&
+                    (pattern.charAt(j) == text.charAt(i) ||
+                            pattern.charAt(j) == '.'));
+
+            if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
+                ans = (dp(i, j+2, text, pattern) ||
+                        first_match && dp(i+1, j, text, pattern));
+            } else {
+                ans = first_match && dp(i+1, j+1, text, pattern);
+            }
+        }
+        memo[i][j] = ans ? true : false;
+        return ans;
+    }
+
+    /**
+     * 动态规划 -- 自底向上
      * @param text
      * @param pattern
      * @return
      */
     public static boolean isMatch(String text, String pattern) {
-        if(pattern.isEmpty()){
-            return text.isEmpty();
-        }
-        boolean firstMatch = !text.isEmpty() && (text.charAt(0) == pattern.charAt(0) || pattern.charAt(0) == '.');
+        boolean[][] dp = new boolean[text.length() + 1][pattern.length() + 1];
+        dp[text.length()][pattern.length()] = true;
 
-        if(pattern.length() > 1 && pattern.charAt(1) == '*'){
-            return isMatch(text, pattern.substring(2)) || (firstMatch && isMatch(text.substring(1), pattern));
-        }else{
-            return firstMatch && isMatch(text.substring(1), pattern.substring(1));
+        for (int i = text.length(); i >= 0; i--) {
+            for (int j = pattern.length() - 1; j >= 0; j--) {
+                // 最后一个字符对比
+                boolean first_match = (i < text.length() &&
+                        (pattern.charAt(j) == text.charAt(i) ||
+                                pattern.charAt(j) == '.'));
+
+                if (j + 1 < pattern.length() && pattern.charAt(j + 1) == '*') {
+                    dp[i][j] = dp[i][j + 2] || first_match && dp[i + 1][j];
+                } else {
+                    dp[i][j] = first_match && dp[i + 1][j + 1];
+                }
+            }
         }
+        return dp[0][0];
     }
-
 }

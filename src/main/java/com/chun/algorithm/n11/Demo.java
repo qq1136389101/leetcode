@@ -28,12 +28,10 @@ package com.chun.algorithm.n11;
  */
 public class Demo {
 
-    public static void main(String[] args) {
-
-    }
-
     /**
-     * 解法- ： 暴力破解法
+     * 解法- ： 暴力破解法（不推荐）
+     * 时间复杂度 O(n^2)
+     * 空间复杂度 O(1)
      *
      * 其实就是求最大面积
      *
@@ -48,17 +46,44 @@ public class Demo {
      * @param height
      * @return
      */
-    public static int maxArea(int[] height) {
-        if(height.length < 2){
-            return 0;
-        }
-
+    public static int maxArea2(int[] height) {
         int maxArea = 0;
         for (int i = 0; i < height.length; i++) {
             for (int j = height.length-1; j > i ; j--) {
                 int x = j - i;
                 int y = Math.min(height[i], height[j]);
                 maxArea = Math.max(maxArea, x * y);
+            }
+        }
+        return maxArea;
+    }
+
+    /**
+     * 解法二: 双指针法（推荐）
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(1)
+     *
+     * 左点 left
+     * 右点 right
+     *
+     * 1. 计算面积并保存
+     * 2. 判断 left 与 right 大小，小的指针进行移动，
+     * 3. 然后再次计算面积，判断与之前的面积的大小，大的保存， 继续第 2 步，直到得出最总结过
+     *
+     * @param height
+     * @return
+     */
+    public static int maxArea(int[] height){
+        int maxArea = 0;
+        int left = 0;
+        int right = height.length - 1;
+
+        while (left < right){
+            maxArea = Math.max(maxArea, (right - left) * Math.min(height[left], height[right]));
+            if(height[left] > height[right]){
+                right--;
+            }else{
+                left++;
             }
         }
         return maxArea;

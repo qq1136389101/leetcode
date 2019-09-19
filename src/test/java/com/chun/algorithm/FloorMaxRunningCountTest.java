@@ -1,4 +1,4 @@
-package algorithm;
+package com.chun.algorithm;
 
 import com.chun.algorithm.FloorMaxRunningCount;
 import org.junit.Assert;

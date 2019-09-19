@@ -1,6 +1,5 @@
-package algorithm.n11;
+package com.chun.algorithm.n11;
 
-import com.chun.algorithm.n11.Demo;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -8,17 +7,15 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-/**
- * @Author chun
- * @Date 2019/9/18 15:58
- */
+import static org.junit.Assert.*;
+
 @RunWith(Parameterized.class)
-public class Test {
+public class DemoTest {
 
     int result;
     int[] height;
 
-    public Test(int result, int[] height) {
+    public DemoTest(int result, int[] height) {
         this.result = result;
         this.height = height;
     }

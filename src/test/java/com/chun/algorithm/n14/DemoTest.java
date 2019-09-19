@@ -23,9 +23,9 @@ public class DemoTest {
     @Parameterized.Parameters
     public static Collection<Object> t(){
         return Arrays.asList(new Object[][]{
-//                {"fl", new String[]{"flower","flow","flight"}},
-//                {"", new String[]{"dog","racecar","car"}},
-//                {"aaaaaaaaaaaaaaaaaaaaa", new String[]{"aaaaaaaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaaaaaaaa"}},
+                {"fl", new String[]{"flower","flow","flight"}},
+                {"", new String[]{"dog","racecar","car"}},
+                {"aaaaaaaaaaaaaaaaaaaaa", new String[]{"aaaaaaaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaaaaaaaa"}},
                 {"", new String[]{}},
         });
     }

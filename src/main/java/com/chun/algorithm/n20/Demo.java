@@ -55,6 +55,7 @@ public class Demo {
 
     /**
      * 字符串是单数直接返回 false
+     * 使用入栈出栈解决
      * @param s
      * @return
      */

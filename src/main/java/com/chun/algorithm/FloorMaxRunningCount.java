@@ -8,10 +8,6 @@ import java.util.Map;
  */
 public class FloorMaxRunningCount {
 
-    public static void main(String[] args) {
-        System.out.println(fromBottom2Top(4));
-    }
-
     /**
      * 自顶向下，加上备忘录模式
      *

@@ -8,6 +8,10 @@
     <artifactId>leetcode</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <properties>
+        <project>1.8</project>
+    </properties>
+
 
     <dependencies>
         <dependency>

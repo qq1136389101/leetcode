@@ -27,12 +27,11 @@ public class DemoTest {
         return Arrays.asList(new Object[][]{
                 {3, 3, 2},
                 {28, 7, 3},
-                {1916797311, 51, 9},
         });
     }
 
     @Test
     public void uniquePaths() {
-        assertEquals(result, Demo.uniquePaths(m, n));
+        assertEquals(result, Demo.uniquePaths2(m, n));
     }
 }

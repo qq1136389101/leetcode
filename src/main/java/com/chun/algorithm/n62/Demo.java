@@ -38,46 +38,19 @@ import java.util.Arrays;
  */
 public class Demo {
 
-    /**
-     * 动态规划
-     * 动态转移方程
-     *      f(m, n) = f(m-1, n) + f(m, n-1) (m>1 && n>1)
-     *      f(m, n) = 1;                    ((m>1 && n=1) || (m=1 && n>1))
-     *      f(m, n) = 0;                    (m=1 && n=1)
-     *
-     * @param m
-     * @param n
-     * @return
-     */
-    public static int uniquePaths(int m, int n) {
-        /**
-         * 递归：性能最差
-         */
-//        if(m > 1 && n >1){
-//            return uniquePaths(m-1, n) + uniquePaths(m, n-1);
-//        }
-//        if((m == 1 && n > 1) || (m > 1 && n == 1)){
-//            return 1;
-//        }
-//        return 1;
-
-        /**
-         * 二维数组: 空间复杂度高
-         */
-        int[][] ints = new int[m][n];
+    public static int uniquePaths2(int m, int n) {
+        int[][] arr = new int[m][n];
         for (int i = 0; i < m; i++) {
-            ints[i][0] = 1;
-        }
-        for (int i = 0; i < n; i++) {
-            ints[0][i] = 1;
-        }
-        for (int i = 1; i < m; i++) {
-            for (int i1 = 1; i1 < n; i1++) {
-                ints[i][i1] = ints[i-1][i1] + ints[i][i1-1];
+            for (int i1 = 0; i1 < n; i1++) {
+                if(i == 0 || i1 == 0){
+                    arr[i][i1] = 1;
+                }
+                else{
+                    arr[i][i1] = arr[i-1][i1] + arr[i][i1-1];
+                }
             }
         }
-        return ints[m-1][n-1];
+        return arr[m-1][n-1];
     }
-
 
 }

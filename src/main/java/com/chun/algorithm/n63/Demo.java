@@ -80,28 +80,34 @@ public class Demo {
      * @param obstacleGrid
      * @return
      */
-//    public static int uniquePathsWithObstacles2(int[][] obstacleGrid) {
-//        int m = obstacleGrid.length;
-//        int n = obstacleGrid[0].length;
-//        return getLen(obstacleGrid, m, n);
-//    }
-//
-//    private static int getLen(int[][] obstacleGrid, int m, int n){
-//        if(obstacleGrid[m-1][n-1] == 1){
-//            return 0;
-//        }
-//        if(m==1 && n==1){
-//            return 1;
-//        }
-//        if(m==1 && n>1){
-//            return getLen(obstacleGrid, m, n-1);
-//        }
-//        if(m>1 && n==1){
-//            return getLen(obstacleGrid, m-1, n);
-//        }
-//        while(m > 1 && n > 1){
-//            return getLen(obstacleGrid, m-1, n) + getLen(obstacleGrid, m, n-1);
-//        }
-//        return 0;
-//    }
+    public static int uniquePathsWithObstacles2(int[][] obstacleGrid) {
+        int[][] dp = new int[obstacleGrid.length][obstacleGrid[0].length];
+        boolean flag = false;
+        for (int i = 0; i < obstacleGrid.length; i++) {
+            if(obstacleGrid[i][0] == 1){
+                flag = true;
+            }
+            dp[i][0] = flag ? 0 : 1;
+        }
+
+        flag = false;
+        for (int j = 0; j < obstacleGrid[0].length; j++) {
+            if(obstacleGrid[0][j] == 1){
+                flag = true;
+            }
+            dp[0][j] = flag ? 0 : 1;
+        }
+
+        for (int i = 1; i < obstacleGrid.length; i++) {
+            for (int j = 1; j < obstacleGrid[0].length; j++) {
+                if(obstacleGrid[i][j] == 1){
+                    dp[i][j] = 0;
+                }
+                else{
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                }
+            }
+        }
+        return dp[obstacleGrid.length-1][obstacleGrid[0].length-1];
+    }
 }

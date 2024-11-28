@@ -33,6 +33,6 @@ public class DemoTest {
 
     @Test
     public void minPathSum() {
-        assertEquals(result, Demo.minPathSum(input));
+        assertEquals(result, Demo.minPathSum2(input));
     }
 }

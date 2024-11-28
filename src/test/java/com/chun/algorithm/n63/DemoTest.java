@@ -28,11 +28,15 @@ public class DemoTest {
                         {0, 1, 0},
                         {0, 0, 0},
                 }},
+//                {1, new int[][]{
+//                        {0, 1},
+//                        {0, 0}
+//                }}
         });
     }
 
     @Test
     public void uniquePathsWithObstacles() {
-        assertEquals(result, Demo.uniquePathsWithObstacles(input));
+        assertEquals(result, Demo.uniquePathsWithObstacles2(input));
     }
 }
